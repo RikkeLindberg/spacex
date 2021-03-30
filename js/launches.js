@@ -27,50 +27,57 @@ fetchLaunches();
 function displayUpcomingLaunches(upcomingLaunches) {
     console.log(upcomingLaunches);
 
-    const upcomingLaunchesContainer = document.querySelector(".launches-container");
+    const upcomingLaunchesContainer = document.querySelector(".upcoming-launches");
 
     let html = "";
 
     for (let i = 1; i < upcomingLaunches.length; i++) {
         let detailsValue = "There are no information yet";
+            if (upcomingLaunches[i].details !== null) {
+                detailsValue = upcomingLaunches[i].details;
+            }
 
-        if (upcomingLaunches[i].details !== null) {
-            detailsValue = upcomingLaunches[i].details;
-        }
+        let missionPatch = "";
+            if (upcomingLaunches[i].links.mission_patch === null) {
+                missionPatch = "/images/spacex-693229_640.jpg";
 
-        html += `<div class="launches__box">
-                    <div class="launches__details">
-                        <div class="launches__heading heading">
+            } else {
+                missionPatch = upcomingLaunches[i].links.mission_patch;
+            }
+
+        const longDate = `${upcomingLaunches[i].launch_date_utc}`;
+        const shortDate = longDate.slice(0, 10); 
+
+        html += `<div class="card">
+                    <div class="card-details">
+                        <h3 class="heading heading--tertiary">
                             <span>${upcomingLaunches[i].mission_name}</span>
-                                ${upcomingLaunches[i].launch_date_utc}
-                        </div>
+                        </h3>
+                        <p>${shortDate}</p>
                     </div>
 
-                    <div class="launches__details--row">
-                        <div class="launches__details">
-                            <div class="api-info__text">
+                    <div class="card-details--row">
+                        <div class="card-info">
+                            <p class="text">
                                 <span>Rocket:</span> ${upcomingLaunches[i].rocket.rocket_name}
-                            </div>
-                            <div class="api-info__text">
+                            </p>
+                            <p class="text">
                                 <span>Launch site:</span> ${upcomingLaunches[i].launch_site.site_name} 
-                            </div>
-                            <div class="api-info__text">
+                            </p>
+                            <p class="text">
                                 <span>Manufacturer:</span> ${upcomingLaunches[i].rocket.second_stage.payloads[0].manufacturer} 
-                            </div>
-                            <div class="api-info__text">
+                            </p>
+                            <p class="text">
                                 <span>Nationality:</span> ${upcomingLaunches[i].rocket.second_stage.payloads[0].nationality} 
-                            </div>
-                            <div class="api-info__text">
+                            </p>
+                            <p class="text">
                                 <span>Payload type:</span> ${upcomingLaunches[i].rocket.second_stage.payloads[0].payload_type} 
-                            </div>
-                            <div class="api-info__text api-info__text--hidden">
+                            </p>
+                            <p class="text text--hidden">
                                 <span>Details:</span> ${detailsValue}
-                            </div>
+                            </p>
                         </div>
-                        
-                        <div class="launches__patch">
-                            <img src="${upcomingLaunches[i].links.mission_patch_small}" alt="Image of mission patch" class="mission-patch">
-                        </div> 
+                        <img src=${missionPatch} alt=${upcomingLaunches[i].mission_name} class="patch">
                     </div>
                 </div>
         `;
@@ -83,7 +90,7 @@ function displayUpcomingLaunches(upcomingLaunches) {
 function displayPastLaunches(pastLaunches) {
     console.log(pastLaunches);
 
-    const pastLaunchesContainer = document.querySelector(".past-launches-container");
+    const pastLaunchesContainer = document.querySelector(".past-launches");
 
     let html = "";
 
@@ -95,41 +102,52 @@ function displayPastLaunches(pastLaunches) {
             detailsValue = pastLaunches[i].details;
         }
 
-        html += `<div class="launches__box">
-                    <div class="launches__details">
-                        <div class="launches__heading heading">
+        let missionPatch = "";
+            if (pastLaunches[i].links.mission_patch === null) {
+                missionPatch = "/images/spacex-693229_640.jpg";
+
+            } else {
+                missionPatch = pastLaunches[i].links.mission_patch;
+            }
+
+        const longDate = `${pastLaunches[i].launch_date_utc}`;
+        const shortDate = longDate.slice(0, 10); 
+
+        html += `<div class="card">
+                    <div class="card-details">
+                        <h3 class="heading heading--tertiary">
                             <span>${pastLaunches[i].mission_name}</span>
-                            ${pastLaunches[i].launch_date_utc}
-                        </div>
+                        </h3>
+                        <p>${shortDate}</p>
                     </div>
 
-                    <div class="launches__details--row">
-                        <div class="launches__details">
-                            <div class="api-info__text">
+                    <div class="card-details--row">
+                        <div class="card-info">
+                            <div class="text">
                                 <span>Rocket:</span> ${pastLaunches[i].rocket.rocket_name}
                             </div>
-                            <div class="api-info__text">
+                            <div class="text">
                                 <span>Launch site:</span> ${pastLaunches[i].launch_site.site_name} 
                             </div>
-                            <div class="api-info__text">
+                            <div class="text">
                                 <span>Manufacturer:</span> ${pastLaunches[i].rocket.second_stage.payloads[0].manufacturer} 
                             </div>
-                            <div class="api-info__text">
+                            <div class="text">
                                 <span>Nationality:</span> ${pastLaunches[i].rocket.second_stage.payloads[0].nationality} 
                             </div>
-                            <div class="api-info__text">
+                            <div class="text">
                                 <span>Payload type:</span> ${pastLaunches[i].rocket.second_stage.payloads[0].payload_type} 
                             </div>
-                            <div class="api-info__text api-info__text--hidden">
+                            <div class="text text--hidden">
                                 <span>Details:</span> ${detailsValue}
                             </div>
                         </div>
-                        <div class="launches__patch">
-                            <img src="${pastLaunches[i].links.mission_patch_small}" alt="Image of mission patch" class="mission-patch">
+                        <div class="card-patch">
+                            <img src=${missionPatch} alt=${pastLaunches[i].mission_name} class="patch">
                         </div>
                     </div>
                     
-                    <div class="api-info__links">
+                    <div class="card-links">
                         <a href="${pastLaunches[i].links.video_link}" target="_blank">Video &#8594</a>
                         <a href="${pastLaunches[i].links.wikipedia}" target="_blank">More info &#8594</a>
                     </div>  

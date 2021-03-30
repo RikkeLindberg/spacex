@@ -1,4 +1,4 @@
-const urlNextLaunch = "https://api.spacexdata.com/v3/launches/next";
+/*const urlNextLaunch = "https://api.spacexdata.com/v3/launches/next";
 
 async function fetchNextLaunch() {
     try {
@@ -28,11 +28,11 @@ function displayNextLaunch(nextLaunch) {
         launchDetails = nextLaunch.details;
     }
 
-    html += `<div class="next-launch__details">
+    html += `<div class="next-launch-card">
                 <h3 class="heading heading--tertiary">
                     ${nextLaunch.mission_name}
                 </h3>
-                <p class="next-launch__date">
+                <p class="date">
                     ${nextLaunch.launch_date_utc}
                 </p>
                 <a href="launches.html" class="btn btn--border">
@@ -40,24 +40,24 @@ function displayNextLaunch(nextLaunch) {
                 </a>
             </div>
 
-            <div class="launch-next__box">
+            <div class="launch-next-card">
                 <div class="launch-next__details">
-                    <div class="api-info__text">
+                    <div class="text">
                         <span>Rocket:</span> ${nextLaunch.rocket.rocket_name}
                     </div>
-                    <div class="api-info__text">
+                    <div class="text">
                         <span>Launch site:</span> ${nextLaunch.launch_site.site_name} 
                     </div>
-                    <div class="api-info__text">
+                    <div class="text">
                         <span>Manufacturer:</span> ${nextLaunch.rocket.second_stage.payloads[0].manufacturer} 
                     </div>
-                    <div class="api-info__text">
+                    <div class="text">
                         <span>Nationality:</span> ${nextLaunch.rocket.second_stage.payloads[0].nationality} 
                     </div>
-                    <div class="api-info__text">
+                    <div class="text">
                         <span>Payload type:</span> ${nextLaunch.rocket.second_stage.payloads[0].payload_type} 
                     </div>
-                    <div class="api-info__text api-info__text--hidden">
+                    <div class="text api-info__text--hidden">
                         <span>Details:</span> ${launchDetails}
                     </div>
                 </div>
